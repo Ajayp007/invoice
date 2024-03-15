@@ -11,12 +11,13 @@ class DetailsScreen extends StatefulWidget {
 }
 
 class _DetailsScreenState extends State<DetailsScreen> {
-  GlobalKey<FormState>formekey=GlobalKey();
+  GlobalKey<FormState> formekey = GlobalKey();
 
-  TextEditingController txtname=TextEditingController();
-  TextEditingController txtemail=TextEditingController();
-  TextEditingController txtphone=TextEditingController();
-  TextEditingController txtadd=TextEditingController();
+  TextEditingController txtname = TextEditingController();
+  TextEditingController txtemail = TextEditingController();
+  TextEditingController txtphone = TextEditingController();
+  TextEditingController txtadd = TextEditingController();
+  TextEditingController txtdate = TextEditingController();
 
   String path = "";
 
@@ -114,23 +115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 10),
-                    Container(
-                      height: 50,
-                      width: 150,
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.grey.shade100,
-                      ),
-                      child: const Text(
-                        "#INV0005",
-                        style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -143,10 +128,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               border: OutlineInputBorder(),
                             ),
                             validator: (value) {
-                              if(value!.isEmpty || value==null)
-                                {
-                                  return "Please Enter The Name";
-                                }
+                              if (value!.isEmpty || value == null) {
+                                return "Please Enter The Name";
+                              }
                               return null;
                             },
                             controller: txtname,
@@ -170,7 +154,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                               if (value!.isEmpty || value == null) {
                                 return "email is required";
                               } else if (!RegExp(
-                                  r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                                   .hasMatch(value)) {
                                 return "please enter email properly";
                               }
@@ -220,7 +204,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
                     const SizedBox(height: 20),
                     TextFormField(
-                      textInputAction: TextInputAction.done,
+                      textInputAction: TextInputAction.next,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: "Address",
@@ -244,11 +228,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       textInputAction: TextInputAction.done,
                       decoration: const InputDecoration(
                         hintText: "DD/MM/YYYY*",
-                        hintStyle: TextStyle(color: Colors.black45, fontSize: 18),
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 20.0, horizontal: 10),
+                        hintStyle:
+                            TextStyle(color: Colors.black45, fontSize: 18),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 20.0, horizontal: 10),
                         border: OutlineInputBorder(),
                       ),
+                      controller: txtdate,
+                      validator: (value) {
+                        if (value!.isEmpty || value == null) {
+                          return "please enter the address";
+                        }
+                        return null;
+                      },
                       keyboardType: TextInputType.datetime,
                     ),
                     const SizedBox(height: 20),
@@ -257,14 +249,24 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("Saved Successfully"),
-                                backgroundColor: Color(0xff5C3586),
-                                behavior: SnackBarBehavior.floating,
-                                duration: Duration(seconds: 3),
-                              ),
-                            );
+                            Navigator.pushNamed(context, 'items')
+                                .then((value) => setState(() {}));
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            if (formekey.currentState!.validate()) {
+                              g1.name = txtname.text;
+                              g1.email = txtemail.text;
+                              g1.phone = txtphone.text;
+                              g1.add = txtadd.text;
+                              g1.date = txtdate.text;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Data Save"),
+                                  backgroundColor: Color(0xff5C3586),
+                                  behavior: SnackBarBehavior.floating,
+                                  duration: Duration(seconds: 3),
+                                ),
+                              );
+                            }
                           },
                           child: Container(
                             height: 50,
@@ -292,17 +294,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 ),
               ),
             ),
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: const Color(0xff5C3586),
-          onPressed: () {
-            Navigator.pushNamed(context, 'items');
-          },
-          child: const Icon(
-            Icons.arrow_forward,
-            size: 28,
-            color: Colors.white,
           ),
         ),
       ),

@@ -1,4 +1,6 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import '../../utils/global.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,6 +20,21 @@ class _HomeScreenState extends State<HomeScreen> {
             "Invoice",
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, 'details');
+                },
+                child: const Icon(
+                  Icons.person,
+                  color: Colors.white,
+                  size: 28,
+                ),
+              ),
+            ),
+          ],
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
@@ -38,8 +55,20 @@ class _HomeScreenState extends State<HomeScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: Center(
+                  child: CircleAvatar(
+                    maxRadius: 50,
+                    backgroundColor: const Color(0xffb88fc4),
+                    backgroundImage: FileImage(
+                      File("${g1.profileImage}"),
+                    ),
+                  ),
+                ),
+              ),
               Container(
-                height: 170,
+                height: 80,
                 margin: const EdgeInsets.all(20),
                 padding: const EdgeInsets.all(10),
                 width: MediaQuery.sizeOf(context).width * 0.90,
@@ -48,67 +77,118 @@ class _HomeScreenState extends State<HomeScreen> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: const [
                     BoxShadow(
-                        color: Color(0xffA367B1),
-                        spreadRadius: 2,
-                        blurRadius: 2,
-                        offset: Offset(6, 6))
+                      color: Color(0xffb88fc4),
+                      spreadRadius: 2,
+                      blurRadius: 1,
+                      offset: Offset(4, 4),
+                    ),
                   ],
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Client Name : Ajay Purohit",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    Text(
+                      "Client Name : ${g1.name}",
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     const SizedBox(
                       height: 5,
                     ),
-                    const Text(
-                      "Invoice : #00005",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    const Text(
-                      "Created Date : 09/03/2024",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'items');
-                          },
-                          style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                              Color(0xff5C3586),
-                            ),
-                          ),
-                          child: const Text(
-                            "Edit",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: const ButtonStyle(
-                            backgroundColor: MaterialStatePropertyAll(
-                              Color(0xff5C3586),
-                            ),
-                          ),
-                          child: const Text(
-                            "Delete",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ],
+                    Text(
+                      "Mobile :- ${g1.phone}",
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
                     ),
                   ],
                 ),
+              ),
+              Column(
+                children: g1.l1
+                    .map(
+                      (e) => Container(
+                        height: 170,
+                        margin: const EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(10),
+                        width: MediaQuery.sizeOf(context).width * 0.90,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffA367B1),
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Color(0xffb88fc4),
+                              spreadRadius: 2,
+                              blurRadius: 1,
+                              offset: Offset(4, 4),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Item Name : ${e['ItemName']}",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Quantity :- ${e['ItemQty']}",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              "Created Date : ${g1.date}",
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 18),
+                            ),
+                            const SizedBox(height: 10),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, 'items')
+                                        .then((value) {
+                                      setState(() {});
+                                    });
+                                  },
+                                  style: const ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xff5C3586),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    "Edit",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      g1.l1.remove(e);
+                                    });
+                                  },
+                                  style: const ButtonStyle(
+                                    backgroundColor: MaterialStatePropertyAll(
+                                      Color(0xff5C3586),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    "Delete",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                    .toList(),
               ),
             ],
           ),
@@ -116,7 +196,9 @@ class _HomeScreenState extends State<HomeScreen> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xff5C3586),
           onPressed: () {
-            Navigator.pushNamed(context, 'details');
+            Navigator.pushNamed(context, 'items').then((value) {
+              setState(() {});
+            });
           },
           child: const Icon(
             Icons.add,
@@ -137,39 +219,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               const SizedBox(height: 20),
-              Container(
-                height: 50,
-                width: MediaQuery.sizeOf(context).width * 0.60,
-                decoration: const BoxDecoration(
-                  color: Color(0xff5C3586),
-                  borderRadius: BorderRadius.horizontal(
-                    right: Radius.circular(15),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, 'pdf');
+                },
+                child: Container(
+                  height: 50,
+                  width: MediaQuery.sizeOf(context).width * 0.60,
+                  decoration: const BoxDecoration(
+                    color: Color(0xff5C3586),
+                    borderRadius: BorderRadius.horizontal(
+                      right: Radius.circular(15),
+                    ),
                   ),
-                ),
-                child: const Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Icon(
-                      Icons.fast_forward,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                    SizedBox(width: 20),
-                    Text(
-                      "Share",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                    Icon(
-                      Icons.arrow_forward_ios,
-                      color: Colors.white,
-                    ),
-                  ],
+                  child: const Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Icon(
+                        Icons.fast_forward,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                      SizedBox(width: 20),
+                      Text(
+                        "Share",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      Spacer(),
+                      Icon(
+                        Icons.arrow_forward_ios,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 20),

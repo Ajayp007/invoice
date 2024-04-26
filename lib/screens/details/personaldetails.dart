@@ -249,8 +249,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       children: [
                         InkWell(
                           onTap: () {
-                            Navigator.pushNamed(context, 'items')
-                                .then((value) => setState(() {}));
+                            Navigator.pushNamed(context, 'items');
                             FocusManager.instance.primaryFocus?.unfocus();
                             if (formekey.currentState!.validate()) {
                               g1.name = txtname.text;

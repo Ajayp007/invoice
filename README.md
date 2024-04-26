@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src ="https://github.com/Ajayp007/invoice/assets/156168895/fd10d5eb-6bef-47b2-9fca-0f6c73a6850d" height="600" width="300">
-
 
 # **Invoice Generater**
 Simple Invoice Generater made with Flutter in India.
@@ -22,6 +20,7 @@ User And Item Details
 Make PDF of your bill
 ## 📲 Screenshots
 
+<img src ="https://github.com/Ajayp007/invoice/assets/156168895/fd10d5eb-6bef-47b2-9fca-0f6c73a6850d" height="600" width="300">
 <img src ="https://github.com/Ajayp007/invoice/assets/156168895/ae3c05d9-7446-42f3-929f-8a4f0be87aae" height="600" width="300">
 <img src ="https://github.com/Ajayp007/invoice/assets/156168895/17f7f61f-f287-4c5e-85de-a687bc93e326" height="600" width="300">
 <img src ="https://github.com/Ajayp007/invoice/assets/156168895/784fbb7c-44c3-4191-b35e-f13e7f885e78" height="600" width="300">

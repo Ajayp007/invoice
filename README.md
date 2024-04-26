@@ -37,7 +37,7 @@ https://github.com/Ajayp007/invoice/assets/156168895/92db10f0-61f1-4281-a1cf-ca6
 
 <div align="center">
 
-<img src ="https://github.com/Ajayp007/invoice/assets/156168895/0bdc7baf-3f39-40a2-ad94-24a8fc977d86" height="600" width="300">
+
 
 ### Made with ❤️ in India.
 ---

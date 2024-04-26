@@ -26,6 +26,7 @@ Make PDF of your bill
 <img src ="https://github.com/Ajayp007/invoice/assets/156168895/784fbb7c-44c3-4191-b35e-f13e7f885e78" height="600" width="300">
 <img src ="https://github.com/Ajayp007/invoice/assets/156168895/0476430e-7cc3-4f9d-ac81-3b5604707597" height="600" width="300">
 <img src ="https://github.com/Ajayp007/invoice/assets/156168895/9dc43267-b737-482f-aea8-c4b6de647835" height="600" width="300">
+<img src ="https://github.com/Ajayp007/invoice/assets/156168895/0bdc7baf-3f39-40a2-ad94-24a8fc977d86" height="600" width="300">
 
 https://github.com/Ajayp007/invoice/assets/156168895/39ea4dc5-95fe-451b-a263-53c2dc03aa69
 https://github.com/Ajayp007/invoice/assets/156168895/92db10f0-61f1-4281-a1cf-ca6404320b6e
